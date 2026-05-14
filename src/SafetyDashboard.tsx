@@ -259,8 +259,8 @@ const DashboardHeader: React.FC<{ time: Date }> = ({ time }) => {
               key={mode}
               onClick={() => setSystemMode(mode)}
               className={`text-[9px] px-2 py-0.5 rounded-md transition-all font-bold uppercase tracking-tighter ${systemMode === mode
-                  ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/20'
-                  : 'text-slate-500 hover:text-slate-300'
+                ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/20'
+                : 'text-slate-500 hover:text-slate-300'
                 }`}
             >
               {mode}
