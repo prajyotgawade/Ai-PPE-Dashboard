@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Activity, 
-  AlertTriangle, 
-  Users, 
-  Camera as CameraIcon, 
-  CheckCircle, 
+import {
+  Activity,
+  AlertTriangle,
+  Users,
+  Camera as CameraIcon,
+  CheckCircle,
   HardHat,
   Cpu,
   Settings,
@@ -14,19 +14,19 @@ import {
   ShieldCheck,
   Zap
 } from 'lucide-react';
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  ResponsiveContainer, 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
   Cell,
-  AreaChart, 
-  Area, 
-  LineChart, 
-  Line 
+  AreaChart,
+  Area,
+  LineChart,
+  Line
 } from 'recharts';
 
 // ═══════════════════════════════════════════
@@ -99,10 +99,10 @@ const INITIAL_CAMERAS: Camera[] = [
     bgColor: '#0a1a0a',
     floorColor: '#122212',
     workers: [
-      { id:'W1', x:0.15, y:0.52, compliant:true,  violation:null,        jitterSeed:0.0 },
-      { id:'W2', x:0.35, y:0.47, compliant:false, violation:'No Helmet', jitterSeed:1.1 },
-      { id:'W3', x:0.58, y:0.54, compliant:true,  violation:null,        jitterSeed:2.2 },
-      { id:'W4', x:0.78, y:0.49, compliant:true,  violation:null,        jitterSeed:3.3 },
+      { id: 'W1', x: 0.15, y: 0.52, compliant: true, violation: null, jitterSeed: 0.0 },
+      { id: 'W2', x: 0.35, y: 0.47, compliant: false, violation: 'No Helmet', jitterSeed: 1.1 },
+      { id: 'W3', x: 0.58, y: 0.54, compliant: true, violation: null, jitterSeed: 2.2 },
+      { id: 'W4', x: 0.78, y: 0.49, compliant: true, violation: null, jitterSeed: 3.3 },
     ]
   },
   {
@@ -112,9 +112,9 @@ const INITIAL_CAMERAS: Camera[] = [
     bgColor: '#0a0f1a',
     floorColor: '#101828',
     workers: [
-      { id:'W1', x:0.22, y:0.50, compliant:true, violation:null, jitterSeed:0.5 },
-      { id:'W2', x:0.52, y:0.46, compliant:true, violation:null, jitterSeed:1.6 },
-      { id:'W3', x:0.76, y:0.54, compliant:true, violation:null, jitterSeed:2.7 },
+      { id: 'W1', x: 0.22, y: 0.50, compliant: true, violation: null, jitterSeed: 0.5 },
+      { id: 'W2', x: 0.52, y: 0.46, compliant: true, violation: null, jitterSeed: 1.6 },
+      { id: 'W3', x: 0.76, y: 0.54, compliant: true, violation: null, jitterSeed: 2.7 },
     ]
   },
   {
@@ -124,12 +124,12 @@ const INITIAL_CAMERAS: Camera[] = [
     bgColor: '#1a0f0a',
     floorColor: '#281810',
     workers: [
-      { id:'W1', x:0.10, y:0.46, compliant:true,  violation:null,      jitterSeed:0.2 },
-      { id:'W2', x:0.25, y:0.54, compliant:true,  violation:null,      jitterSeed:1.3 },
-      { id:'W3', x:0.42, y:0.49, compliant:false, violation:'No Vest', jitterSeed:2.4 },
-      { id:'W4', x:0.58, y:0.52, compliant:true,  violation:null,      jitterSeed:3.5 },
-      { id:'W5', x:0.72, y:0.47, compliant:true,  violation:null,      jitterSeed:4.6 },
-      { id:'W6', x:0.87, y:0.53, compliant:true,  violation:null,      jitterSeed:5.7 },
+      { id: 'W1', x: 0.10, y: 0.46, compliant: true, violation: null, jitterSeed: 0.2 },
+      { id: 'W2', x: 0.25, y: 0.54, compliant: true, violation: null, jitterSeed: 1.3 },
+      { id: 'W3', x: 0.42, y: 0.49, compliant: false, violation: 'No Vest', jitterSeed: 2.4 },
+      { id: 'W4', x: 0.58, y: 0.52, compliant: true, violation: null, jitterSeed: 3.5 },
+      { id: 'W5', x: 0.72, y: 0.47, compliant: true, violation: null, jitterSeed: 4.6 },
+      { id: 'W6', x: 0.87, y: 0.53, compliant: true, violation: null, jitterSeed: 5.7 },
     ]
   },
   {
@@ -139,71 +139,71 @@ const INITIAL_CAMERAS: Camera[] = [
     bgColor: '#0f0a1a',
     floorColor: '#181028',
     workers: [
-      { id:'W1', x:0.32, y:0.50, compliant:true, violation:null, jitterSeed:0.8 },
-      { id:'W2', x:0.68, y:0.50, compliant:true, violation:null, jitterSeed:1.9 },
+      { id: 'W1', x: 0.32, y: 0.50, compliant: true, violation: null, jitterSeed: 0.8 },
+      { id: 'W2', x: 0.68, y: 0.50, compliant: true, violation: null, jitterSeed: 1.9 },
     ]
   },
 ];
 
 const INITIAL_TIMESERIES: TimeSeriesPoint[] = [
-  { time: '8AM',  violations: 12, compliance: 88 },
-  { time: '9AM',  violations: 18, compliance: 85 },
+  { time: '8AM', violations: 12, compliance: 88 },
+  { time: '9AM', violations: 18, compliance: 85 },
   { time: '10AM', violations: 14, compliance: 87 },
   { time: '11AM', violations: 22, compliance: 90 },
   { time: '12PM', violations: 28, compliance: 86 },
-  { time: '1PM',  violations: 19, compliance: 91 },
-  { time: '2PM',  violations: 24, compliance: 89 },
-  { time: '3PM',  violations: 30, compliance: 88 },
-  { time: '4PM',  violations: 26, compliance: 92 },
-  { time: '5PM',  violations: 34, compliance: 90 },
-  { time: '6PM',  violations: 38, compliance: 91 },
-  { time: '7PM',  violations: 32, compliance: 93 },
-  { time: 'Now',  violations: 34, compliance: 92 },
+  { time: '1PM', violations: 19, compliance: 91 },
+  { time: '2PM', violations: 24, compliance: 89 },
+  { time: '3PM', violations: 30, compliance: 88 },
+  { time: '4PM', violations: 26, compliance: 92 },
+  { time: '5PM', violations: 34, compliance: 90 },
+  { time: '6PM', violations: 38, compliance: 91 },
+  { time: '7PM', violations: 32, compliance: 93 },
+  { time: 'Now', violations: 34, compliance: 92 },
 ];
 
 const INITIAL_PPE: PPEViolation[] = [
-  { type:'No Helmet',  count:18, color:'#ff1744' },
-  { type:'No Vest',    count:9,  color:'#ffab00' },
-  { type:'No Gloves',  count:6,  color:'#ffab00' },
-  { type:'No Boots',   count:3,  color:'#00b8ff' },
-  { type:'No Goggles', count:2,  color:'#00b8ff' },
+  { type: 'No Helmet', count: 18, color: '#ff1744' },
+  { type: 'No Vest', count: 9, color: '#ffab00' },
+  { type: 'No Gloves', count: 6, color: '#ffab00' },
+  { type: 'No Boots', count: 3, color: '#00b8ff' },
+  { type: 'No Goggles', count: 2, color: '#00b8ff' },
 ];
 
 const INITIAL_ZONES: ZoneCell[] = [
   { id: '1', name: 'Loading A', level: 'high', violations: 12 },
   { id: '2', name: 'Loading B', level: 'medium', violations: 8 },
-  { id: '3', name: 'WH-C',      level: 'low', violations: 3 },
-  { id: '4', name: 'Office',    level: 'clear', violations: 0 },
-  { id: '5', name: 'Load Bay',  level: 'medium', violations: 7 },
-  { id: '6', name: 'Central',   level: 'high', violations: 15 },
-  { id: '7', name: 'Zone B',    level: 'low', violations: 2 },
-  { id: '8', name: 'WH-D',      level: 'medium', violations: 6 },
-  { id: '9', name: 'Exit A',    level: 'clear', violations: 0 },
+  { id: '3', name: 'WH-C', level: 'low', violations: 3 },
+  { id: '4', name: 'Office', level: 'clear', violations: 0 },
+  { id: '5', name: 'Load Bay', level: 'medium', violations: 7 },
+  { id: '6', name: 'Central', level: 'high', violations: 15 },
+  { id: '7', name: 'Zone B', level: 'low', violations: 2 },
+  { id: '8', name: 'WH-D', level: 'medium', violations: 6 },
+  { id: '9', name: 'Exit A', level: 'clear', violations: 0 },
   { id: '10', name: 'Assembly', level: 'high', violations: 22 },
-  { id: '11', name: 'Storage',  level: 'medium', violations: 5 },
-  { id: '12', name: 'WH-E',     level: 'low', violations: 4 },
+  { id: '11', name: 'Storage', level: 'medium', violations: 5 },
+  { id: '12', name: 'WH-E', level: 'low', violations: 4 },
 ];
 
 const INITIAL_METRICS: SystemMetric[] = [
   { label: 'AI Compute Load', value: 68, unit: '%', status: 'online', showBar: true },
   { label: 'Network Latency', value: 12, unit: 'ms', status: 'online', showBar: false },
   { label: 'Sensor Integrity', value: 99, unit: '%', status: 'online', showBar: true },
-  { label: 'Buffer Usage',    value: 42, unit: '%', status: 'warning', showBar: true },
+  { label: 'Buffer Usage', value: 42, unit: '%', status: 'warning', showBar: true },
 ];
 
 const ALERT_MESSAGE_POOL = [
-  { camera:'CAM 01', message:'No helmet detected — Worker near Loading Bay',     severity:'critical' as const },
-  { camera:'CAM 03', message:'Safety vest missing — Assembly station',           severity:'critical' as const },
-  { camera:'CAM 02', message:'No gloves detected — Warehouse picker',            severity:'warning'  as const },
-  { camera:'CAM 04', message:'Safety boots absent — Exit checkpoint',            severity:'warning'  as const },
-  { camera:'CAM 01', message:'Multiple workers without helmets — Bay A',         severity:'critical' as const },
-  { camera:'CAM 03', message:'Eye protection missing — Grinding operation',      severity:'warning'  as const },
-  { camera:'CAM 02', message:'High-vis vest absent — Forklift zone',            severity:'critical' as const },
-  { camera:'CAM 04', message:'No helmet — Worker entering restricted area',      severity:'critical' as const },
-  { camera:'CAM 01', message:'Gloves not worn — Chemical handling zone',         severity:'warning'  as const },
-  { camera:'CAM 03', message:'Hard hat missing — Scaffolding area',             severity:'critical' as const },
-  { camera:'CAM 02', message:'No safety vest — Near moving machinery',           severity:'critical' as const },
-  { camera:'CAM 04', message:'Full PPE violation — Multiple items missing',      severity:'critical' as const },
+  { camera: 'CAM 01', message: 'No helmet detected — Worker near Loading Bay', severity: 'critical' as const },
+  { camera: 'CAM 03', message: 'Safety vest missing — Assembly station', severity: 'critical' as const },
+  { camera: 'CAM 02', message: 'No gloves detected — Warehouse picker', severity: 'warning' as const },
+  { camera: 'CAM 04', message: 'Safety boots absent — Exit checkpoint', severity: 'warning' as const },
+  { camera: 'CAM 01', message: 'Multiple workers without helmets — Bay A', severity: 'critical' as const },
+  { camera: 'CAM 03', message: 'Eye protection missing — Grinding operation', severity: 'warning' as const },
+  { camera: 'CAM 02', message: 'High-vis vest absent — Forklift zone', severity: 'critical' as const },
+  { camera: 'CAM 04', message: 'No helmet — Worker entering restricted area', severity: 'critical' as const },
+  { camera: 'CAM 01', message: 'Gloves not worn — Chemical handling zone', severity: 'warning' as const },
+  { camera: 'CAM 03', message: 'Hard hat missing — Scaffolding area', severity: 'critical' as const },
+  { camera: 'CAM 02', message: 'No safety vest — Near moving machinery', severity: 'critical' as const },
+  { camera: 'CAM 04', message: 'Full PPE violation — Multiple items missing', severity: 'critical' as const },
 ];
 
 const INITIAL_ALERTS: Alert[] = [
@@ -211,7 +211,7 @@ const INITIAL_ALERTS: Alert[] = [
   { id: '2', timestamp: new Date(Date.now() - 25 * 60000), camera: 'CAM 03', message: 'Safety vest missing — Assembly station', severity: 'critical', isNew: false },
   { id: '3', timestamp: new Date(Date.now() - 15 * 60000), camera: 'CAM 02', message: 'No gloves detected — Warehouse picker', severity: 'warning', isNew: false },
   { id: '4', timestamp: new Date(Date.now() - 10 * 60000), camera: 'CAM 04', message: 'Safety boots absent — Exit checkpoint', severity: 'warning', isNew: false },
-  { id: '5', timestamp: new Date(Date.now() - 5 * 60000),  camera: 'CAM 01', message: 'Multiple workers without helmets — Bay A', severity: 'critical', isNew: false },
+  { id: '5', timestamp: new Date(Date.now() - 5 * 60000), camera: 'CAM 01', message: 'Multiple workers without helmets — Bay A', severity: 'critical', isNew: false },
 ];
 
 // ═══════════════════════════════════════════
@@ -239,9 +239,9 @@ const DashboardHeader: React.FC<{ time: Date }> = ({ time }) => {
             </div>
           </div>
         </div>
-        
+
         <div className="h-8 w-px bg-white/10 mx-2"></div>
-        
+
         <nav className="flex items-center gap-6">
           <button className="flex items-center gap-2 text-indigo-400 border-b-2 border-indigo-400 pb-1 px-1 transition-all">
             <LayoutDashboard size={14} />
@@ -249,7 +249,7 @@ const DashboardHeader: React.FC<{ time: Date }> = ({ time }) => {
           </button>
         </nav>
       </div>
-      
+
       <div className="flex items-center gap-6 font-mono">
         {/* Working Mode Selector */}
         <div className="flex items-center gap-2 bg-black/40 border border-white/10 rounded-lg px-3 py-1.5 shadow-inner">
@@ -258,17 +258,16 @@ const DashboardHeader: React.FC<{ time: Date }> = ({ time }) => {
             <button
               key={mode}
               onClick={() => setSystemMode(mode)}
-              className={`text-[9px] px-2 py-0.5 rounded-md transition-all font-bold uppercase tracking-tighter ${
-                systemMode === mode 
-                ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/20' 
-                : 'text-slate-500 hover:text-slate-300'
-              }`}
+              className={`text-[9px] px-2 py-0.5 rounded-md transition-all font-bold uppercase tracking-tighter ${systemMode === mode
+                  ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/20'
+                  : 'text-slate-500 hover:text-slate-300'
+                }`}
             >
               {mode}
             </button>
           ))}
         </div>
-        
+
         <div className="flex items-center gap-3">
           <button className="p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-full transition-all relative group">
             <Bell size={18} className="group-hover:scale-110 transition-transform" />
@@ -298,10 +297,10 @@ const DashboardHeader: React.FC<{ time: Date }> = ({ time }) => {
   );
 };
 
-const StatCard: React.FC<{ 
-  label: string; 
-  value: string | number; 
-  subtext: string; 
+const StatCard: React.FC<{
+  label: string;
+  value: string | number;
+  subtext: string;
   accentColor: 'cyan' | 'green' | 'red' | 'amber';
   icon: React.ElementType;
 }> = ({ label, value, subtext, accentColor, icon: Icon }) => {
@@ -389,8 +388,8 @@ const CCTVFeed: React.FC<{ camera: Camera; frameCount: number }> = ({ camera, fr
 
       // 4. Background objects (simplified blocks)
       ctx.fillStyle = 'rgba(100,120,150,0.15)';
-      ctx.fillRect(W*0.04, H*0.22, W*0.14, H*0.25);
-      ctx.fillRect(W*0.60, H*0.20, W*0.16, H*0.28);
+      ctx.fillRect(W * 0.04, H * 0.22, W * 0.14, H * 0.25);
+      ctx.fillRect(W * 0.60, H * 0.20, W * 0.16, H * 0.28);
 
       // 5. Workers
       camera.workers.forEach((worker) => {
@@ -406,43 +405,43 @@ const CCTVFeed: React.FC<{ camera: Camera; frameCount: number }> = ({ camera, fr
 
         // Legs
         ctx.fillStyle = '#263238';
-        ctx.fillRect(wx - bodyW*0.25, wy, bodyW*0.2, bodyH*0.4);
-        ctx.fillRect(wx + bodyW*0.05, wy, bodyW*0.2, bodyH*0.4);
+        ctx.fillRect(wx - bodyW * 0.25, wy, bodyW * 0.2, bodyH * 0.4);
+        ctx.fillRect(wx + bodyW * 0.05, wy, bodyW * 0.2, bodyH * 0.4);
 
         // Body
         ctx.fillStyle = worker.compliant ? '#f59e0b' : '#ef4444';
-        ctx.fillRect(wx - bodyW*0.35, wy - bodyH*0.5, bodyW*0.7, bodyH*0.5);
+        ctx.fillRect(wx - bodyW * 0.35, wy - bodyH * 0.5, bodyW * 0.7, bodyH * 0.5);
 
         // Vest stripe
         if (worker.compliant) {
           ctx.strokeStyle = '#fef08a';
           ctx.lineWidth = 1.5;
           ctx.beginPath();
-          ctx.moveTo(wx - bodyW*0.35, wy - bodyH*0.3);
-          ctx.lineTo(wx + bodyW*0.35, wy - bodyH*0.3);
+          ctx.moveTo(wx - bodyW * 0.35, wy - bodyH * 0.3);
+          ctx.lineTo(wx + bodyW * 0.35, wy - bodyH * 0.3);
           ctx.stroke();
         }
 
         // Head
         ctx.beginPath();
-        ctx.arc(wx, wy - bodyH*0.5 - headR, headR, 0, Math.PI * 2);
+        ctx.arc(wx, wy - bodyH * 0.5 - headR, headR, 0, Math.PI * 2);
         ctx.fillStyle = '#ffcc80';
         ctx.fill();
 
         // Helmet
         if (worker.compliant) {
           ctx.beginPath();
-          ctx.ellipse(wx, wy - bodyH*0.5 - headR*1.6, headR*1.4, headR*0.6, 0, Math.PI, 0);
+          ctx.ellipse(wx, wy - bodyH * 0.5 - headR * 1.6, headR * 1.4, headR * 0.6, 0, Math.PI, 0);
           ctx.fillStyle = '#fbbf24';
           ctx.fill();
         }
 
         // Bounding box
         const pad = 6;
-        const bx = wx - bodyW*0.6 - pad;
-        const by = wy - bodyH*0.8 - headR*2 - pad;
-        const bw = bodyW*1.2 + pad*2;
-        const bh = bodyH*1.3 + headR*2 + pad*2;
+        const bx = wx - bodyW * 0.6 - pad;
+        const by = wy - bodyH * 0.8 - headR * 2 - pad;
+        const bw = bodyW * 1.2 + pad * 2;
+        const bh = bodyH * 1.3 + headR * 2 + pad * 2;
 
         ctx.strokeStyle = worker.compliant ? '#10b981' : '#ef4444';
         ctx.lineWidth = 1;
@@ -461,7 +460,7 @@ const CCTVFeed: React.FC<{ camera: Camera; frameCount: number }> = ({ camera, fr
         const labelText = `${worker.id}${worker.compliant ? ' [OK]' : ' [!]'}`;
         const labelWidth = ctx.measureText(labelText).width;
         ctx.fillRect(bx, by - fontSize - 2, labelWidth + 6, fontSize + 2);
-        
+
         ctx.fillStyle = '#fff';
         ctx.textAlign = 'left';
         ctx.fillText(labelText, bx + 3, by - 4);
@@ -474,7 +473,7 @@ const CCTVFeed: React.FC<{ camera: Camera; frameCount: number }> = ({ camera, fr
       });
 
       // 6. Vignette & Grain
-      const grad = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W/1.2);
+      const grad = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W / 1.2);
       grad.addColorStop(0, 'rgba(0,0,0,0)');
       grad.addColorStop(1, 'rgba(0,0,0,0.3)');
       ctx.fillStyle = grad;
@@ -491,13 +490,13 @@ const CCTVFeed: React.FC<{ camera: Camera; frameCount: number }> = ({ camera, fr
       // 7. HUD Overlays
       const now = new Date();
       ctx.fillStyle = 'rgba(0,255,255,0.6)';
-      ctx.font = `${Math.max(7, W*0.02)}px 'Share Tech Mono', monospace`;
-      ctx.fillText(`ZONE: ${camera.location.toUpperCase()}`, W*0.04, H*0.9);
-      ctx.fillText(`ISO: 800 | F2.8`, W*0.04, H*0.95);
+      ctx.font = `${Math.max(7, W * 0.02)}px 'Share Tech Mono', monospace`;
+      ctx.fillText(`ZONE: ${camera.location.toUpperCase()}`, W * 0.04, H * 0.9);
+      ctx.fillText(`ISO: 800 | F2.8`, W * 0.04, H * 0.95);
 
       const ts = now.toLocaleTimeString('en-US', { hour12: false });
       ctx.textAlign = 'right';
-      ctx.fillText(ts, W*0.96, H*0.95);
+      ctx.fillText(ts, W * 0.96, H * 0.95);
       ctx.textAlign = 'left';
     };
 
@@ -508,7 +507,7 @@ const CCTVFeed: React.FC<{ camera: Camera; frameCount: number }> = ({ camera, fr
   return (
     <div ref={containerRef} className="relative group overflow-hidden border border-white/10 rounded-xl aspect-video bg-black shadow-lg">
       <canvas ref={canvasRef} className="w-full h-full opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
-      
+
       {/* Corner Brackets */}
       <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-cyan-500/50"></div>
       <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-cyan-500/50"></div>
@@ -527,12 +526,12 @@ const CCTVFeed: React.FC<{ camera: Camera; frameCount: number }> = ({ camera, fr
           <Monitor size={10} className="text-cyan-400" />
         </div>
       </div>
-      
+
       {/* Scan line effect */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
-        <div 
-          className="w-full h-[2px] bg-cyan-500/50" 
-          style={{ 
+        <div
+          className="w-full h-[2px] bg-cyan-500/50"
+          style={{
             boxShadow: '0 0 15px 2px rgba(6,182,212,0.8)',
             transform: `translateY(${(frameCount * 1.5) % 200}%)`,
             transition: 'transform 0.1s linear'
@@ -554,15 +553,15 @@ const PPEBreakdownChart: React.FC<{ data: PPEViolation[] }> = ({ data }) => {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} layout="vertical" margin={{ left: -10, right: 10, top: 0, bottom: 0 }}>
             <XAxis type="number" hide />
-            <YAxis 
-              dataKey="type" 
-              type="category" 
-              tick={{ fill: '#4a7aaa', fontSize: 9, fontFamily: 'Share Tech Mono' }} 
+            <YAxis
+              dataKey="type"
+              type="category"
+              tick={{ fill: '#4a7aaa', fontSize: 9, fontFamily: 'Share Tech Mono' }}
               axisLine={{ stroke: '#1a3a7a' }}
               tickLine={false}
               width={70}
             />
-            <Tooltip 
+            <Tooltip
               cursor={{ fill: 'rgba(255,255,255,0.05)' }}
               contentStyle={{ background: '#080f1e', border: '1px solid #1a3a7a', borderRadius: '2px', padding: '4px 8px' }}
               itemStyle={{ fontSize: '10px', color: '#d0e8ff', fontFamily: 'Share Tech Mono' }}
@@ -592,32 +591,32 @@ const ViolationTrendChart: React.FC<{ data: TimeSeriesPoint[] }> = ({ data }) =>
           <AreaChart data={data}>
             <defs>
               <linearGradient id="colorViolations" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#00b8ff" stopOpacity={0.1}/>
-                <stop offset="95%" stopColor="#00b8ff" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#00b8ff" stopOpacity={0.1} />
+                <stop offset="95%" stopColor="#00b8ff" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid stroke="#112244" strokeDasharray="3 3" vertical={false} />
-            <XAxis 
-              dataKey="time" 
-              tick={{ fill: '#4a7aaa', fontSize: 9, fontFamily: 'Share Tech Mono' }} 
+            <XAxis
+              dataKey="time"
+              tick={{ fill: '#4a7aaa', fontSize: 9, fontFamily: 'Share Tech Mono' }}
               axisLine={{ stroke: '#1a3a7a' }}
               tickLine={false}
             />
-            <YAxis 
-              tick={{ fill: '#4a7aaa', fontSize: 9, fontFamily: 'Share Tech Mono' }} 
+            <YAxis
+              tick={{ fill: '#4a7aaa', fontSize: 9, fontFamily: 'Share Tech Mono' }}
               axisLine={{ stroke: '#1a3a7a' }}
               tickLine={false}
             />
-            <Tooltip 
+            <Tooltip
               contentStyle={{ background: '#080f1e', border: '1px solid #1a3a7a', borderRadius: '2px', padding: '4px 8px' }}
               itemStyle={{ fontSize: '10px', color: '#d0e8ff', fontFamily: 'Share Tech Mono' }}
             />
-            <Area 
-              type="monotone" 
-              dataKey="violations" 
-              stroke="#00b8ff" 
-              fillOpacity={0.06} 
-              fill="#00b8ff" 
+            <Area
+              type="monotone"
+              dataKey="violations"
+              stroke="#00b8ff"
+              fillOpacity={0.06}
+              fill="#00b8ff"
               strokeWidth={2}
               dot={{ r: 2, fill: '#00b8ff', strokeWidth: 0 }}
               activeDot={{ r: 4, strokeWidth: 0 }}
@@ -640,27 +639,27 @@ const ComplianceTrendChart: React.FC<{ data: TimeSeriesPoint[] }> = ({ data }) =
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
             <CartesianGrid stroke="#112244" strokeDasharray="3 3" vertical={false} />
-            <XAxis 
-              dataKey="time" 
-              tick={{ fill: '#4a7aaa', fontSize: 9, fontFamily: 'Share Tech Mono' }} 
+            <XAxis
+              dataKey="time"
+              tick={{ fill: '#4a7aaa', fontSize: 9, fontFamily: 'Share Tech Mono' }}
               axisLine={{ stroke: '#1a3a7a' }}
               tickLine={false}
             />
-            <YAxis 
-              domain={[75, 100]} 
+            <YAxis
+              domain={[75, 100]}
               tickFormatter={v => `${v}%`}
-              tick={{ fill: '#4a7aaa', fontSize: 9, fontFamily: 'Share Tech Mono' }} 
+              tick={{ fill: '#4a7aaa', fontSize: 9, fontFamily: 'Share Tech Mono' }}
               axisLine={{ stroke: '#1a3a7a' }}
               tickLine={false}
             />
-            <Tooltip 
+            <Tooltip
               contentStyle={{ background: '#080f1e', border: '1px solid #1a3a7a', borderRadius: '2px', padding: '4px 8px' }}
               itemStyle={{ fontSize: '10px', color: '#d0e8ff', fontFamily: 'Share Tech Mono' }}
             />
-            <Line 
-              type="monotone" 
-              dataKey="compliance" 
-              stroke="#00e676" 
+            <Line
+              type="monotone"
+              dataKey="compliance"
+              stroke="#00e676"
               strokeWidth={2}
               dot={{ r: 2, fill: '#00e676', strokeWidth: 0 }}
               activeDot={{ r: 4, strokeWidth: 0 }}
@@ -701,7 +700,7 @@ const ZoneHeatmap: React.FC<{ zones: ZoneCell[] }> = ({ zones }) => {
       </div>
       <div className="grid grid-cols-4 grid-rows-3 gap-1 flex-1">
         {zones.map(zone => (
-          <div 
+          <div
             key={zone.id}
             title={`${zone.name}: ${zone.violations} violations`}
             className={`relative group cursor-help border ${getBorderColor(zone.level)} rounded-sm transition-all duration-300 hover:brightness-125`}
@@ -761,8 +760,8 @@ const AlertLog: React.FC<{ alerts: Alert[] }> = ({ alerts }) => {
           </div>
         ) : (
           alerts.map((alert) => (
-            <div 
-              key={alert.id} 
+            <div
+              key={alert.id}
               className={`p-4 border-b border-white/5 last:border-0 hover:bg-white/[0.03] transition-all duration-300 relative group ${alert.isNew ? 'slide-in-right bg-cyan-500/5' : ''}`}
             >
               <div className="flex items-start gap-4">
@@ -809,7 +808,7 @@ const SystemStatus: React.FC<{ metrics: SystemMetric[] }> = ({ metrics }) => {
             </div>
             {metric.showBar && (
               <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                <div 
+                <div
                   className={`h-full transition-all duration-[800ms] ease ${metric.value > 80 ? 'bg-red-500' : metric.value > 60 ? 'bg-amber-500' : 'bg-cyan-500'}`}
                   style={{ width: `${metric.value}%` }}
                 ></div>
@@ -857,7 +856,7 @@ const SafetyDashboard: React.FC = () => {
     camsOnline: 16,
     camsTotal: 18
   });
-  
+
   const animFrameRef = useRef<number>(0);
 
   // Initialize Fonts and Global Styles
@@ -951,24 +950,24 @@ const SafetyDashboard: React.FC = () => {
         const delta = (Math.random() - 0.5) * 8;
         return { ...m, value: Math.min(95, Math.max(40, Math.round(m.value + delta))) };
       }));
-      
+
       setStats(prev => ({
         ...prev,
         workers: 120 + Math.floor(Math.random() * 15),
         compliance: 88 + Math.floor(Math.random() * 8),
       }));
-      
+
       setPpeData(prev => prev.map(p => ({
         ...p,
         count: Math.max(1, p.count + Math.floor((Math.random() - 0.4) * 3))
       })));
-      
+
       setTimeSeriesData(prev => {
         const last = prev[prev.length - 1];
         const newPoint: TimeSeriesPoint = {
           time: 'Now',
-          violations: Math.max(0, last.violations + Math.floor((Math.random()-0.3)*4)),
-          compliance: Math.min(100, Math.max(80, last.compliance + Math.floor((Math.random()-0.4)*3)))
+          violations: Math.max(0, last.violations + Math.floor((Math.random() - 0.3) * 4)),
+          compliance: Math.min(100, Math.max(80, last.compliance + Math.floor((Math.random() - 0.4) * 3)))
         };
         return [...prev.slice(1), newPoint];
       });
@@ -983,21 +982,21 @@ const SafetyDashboard: React.FC = () => {
         ...cam,
         workers: cam.workers.map(w => {
           if (Math.random() < 0.12) {
-            const violations = ['No Helmet','No Vest','No Gloves','No Goggles'];
+            const violations = ['No Helmet', 'No Vest', 'No Gloves', 'No Goggles'];
             const newCompliant = !w.compliant;
             return {
               ...w,
               compliant: newCompliant,
-              violation: newCompliant ? null : violations[Math.floor(Math.random()*violations.length)]
+              violation: newCompliant ? null : violations[Math.floor(Math.random() * violations.length)]
             };
           }
           return w;
         })
       })));
-      
+
       setZones(prev => prev.map(z => {
         if (Math.random() < 0.4) {
-          const levels: ZoneCell['level'][] = ['high','medium','low','clear'];
+          const levels: ZoneCell['level'][] = ['high', 'medium', 'low', 'clear'];
           const weights = [0.2, 0.35, 0.3, 0.15];
           const r = Math.random();
           let cumulative = 0;
@@ -1027,17 +1026,17 @@ const SafetyDashboard: React.FC = () => {
         severity: pick.severity,
         isNew: true
       };
-      
+
       setAlerts(prev => [newAlert, ...prev].slice(0, 15));
-      
+
       setStats(prev => ({
         ...prev,
         violations: prev.violations + (pick.severity === 'critical' ? 1 : 0),
         activeAlerts: Math.min(prev.activeAlerts + 1, 12)
       }));
-      
+
       setTimeout(() => {
-        setAlerts(prev => prev.map(a => 
+        setAlerts(prev => prev.map(a =>
           a.id === newAlert.id ? { ...a, isNew: false } : a
         ));
       }, 2000);
@@ -1056,7 +1055,7 @@ const SafetyDashboard: React.FC = () => {
 
       <div className="relative z-10 flex flex-col min-h-screen">
         <DashboardHeader time={currentTime} />
-        
+
         <main className="flex-1 p-4 md:p-8 space-y-8 max-w-[1700px] mx-auto w-full">
           {/* Main Title Section */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-l-4 border-indigo-500/60 pl-8 py-2 bg-white/2 rounded-r-2xl pr-6 backdrop-blur-sm">
@@ -1076,9 +1075,9 @@ const SafetyDashboard: React.FC = () => {
               <div className="flex flex-col items-end mr-2">
                 <div className="text-[9px] font-bold text-slate-600 uppercase tracking-widest">Authorized Personnel</div>
                 <div className="flex -space-x-2 mt-2">
-                  {[1,2,3,4,5].map(i => (
+                  {[1, 2, 3, 4, 5].map(i => (
                     <div key={i} className="w-9 h-9 rounded-full border-2 border-[#0a0b10] bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-400 overflow-hidden shadow-xl ring-1 ring-white/5">
-                      <img src={`https://i.pravatar.cc/64?img=${i+15}`} alt="user" className="opacity-80 hover:opacity-100 transition-opacity" />
+                      <img src={`https://i.pravatar.cc/64?img=${i + 15}`} alt="user" className="opacity-80 hover:opacity-100 transition-opacity" />
                     </div>
                   ))}
                   <div className="w-9 h-9 rounded-full border-2 border-[#0a0b10] bg-indigo-950 flex items-center justify-center text-[10px] font-bold text-indigo-400 shadow-xl ring-1 ring-white/5">+14</div>
@@ -1093,40 +1092,40 @@ const SafetyDashboard: React.FC = () => {
 
           {/* Stat row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            <StatCard 
-              label="Asset Count" 
-              value={stats.workers} 
-              subtext="Real-time occupancy" 
-              accentColor="cyan" 
-              icon={Users} 
+            <StatCard
+              label="Asset Count"
+              value={stats.workers}
+              subtext="Real-time occupancy"
+              accentColor="cyan"
+              icon={Users}
             />
-            <StatCard 
-              label="Safety Integrity" 
-              value={`${stats.compliance}%`} 
-              subtext="Aggregated confidence" 
-              accentColor="green" 
-              icon={ShieldCheck} 
+            <StatCard
+              label="Safety Integrity"
+              value={`${stats.compliance}%`}
+              subtext="Aggregated confidence"
+              accentColor="green"
+              icon={ShieldCheck}
             />
-            <StatCard 
-              label="Breach Alerts" 
-              value={stats.violations} 
-              subtext="Unresolved incidents" 
-              accentColor="red" 
-              icon={AlertTriangle} 
+            <StatCard
+              label="Breach Alerts"
+              value={stats.violations}
+              subtext="Unresolved incidents"
+              accentColor="red"
+              icon={AlertTriangle}
             />
-            <StatCard 
-              label="Telemetry Anomaly" 
-              value={stats.activeAlerts} 
-              subtext="System flags (24H)" 
-              accentColor="amber" 
-              icon={Activity} 
+            <StatCard
+              label="Telemetry Anomaly"
+              value={stats.activeAlerts}
+              subtext="System flags (24H)"
+              accentColor="amber"
+              icon={Activity}
             />
-            <StatCard 
-              label="Node Status" 
-              value={`${stats.camsOnline}/${stats.camsTotal}`} 
-              subtext="Optical array health" 
-              accentColor="cyan" 
-              icon={CameraIcon} 
+            <StatCard
+              label="Node Status"
+              value={`${stats.camsOnline}/${stats.camsTotal}`}
+              subtext="Optical array health"
+              accentColor="cyan"
+              icon={CameraIcon}
             />
           </div>
 
@@ -1161,7 +1160,7 @@ const SafetyDashboard: React.FC = () => {
                 <ViolationTrendChart data={timeSeriesData} />
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-8 h-[550px]">
               <AlertLog alerts={alerts} />
               <div className="flex flex-col gap-8">
