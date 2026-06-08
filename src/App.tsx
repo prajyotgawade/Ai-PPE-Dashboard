@@ -1,8 +1,8 @@
-import SafetyDashboard from './SafetyDashboard'
+import AISafetyDashboard from './AISafetyDashboard'
 
 function App() {
   return (
-    <SafetyDashboard />
+    <AISafetyDashboard />
   )
 }
 
