@@ -79,7 +79,7 @@ type Alert = { id: number; time: string; message: string; cam: string };
 
 const AISafetyDashboard: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  
+
   // State
   const [showDemoPopup, setShowDemoPopup] = useState(false);
   const [workers, setWorkers] = useState(128);
@@ -139,7 +139,7 @@ const AISafetyDashboard: React.FC = () => {
   return (
     <>
       <style>{GLOBAL_STYLES}</style>
-      
+
       <div className="dashboard-container">
         {/* ROW 1: HEADER (50px) */}
         <div className="flex items-center justify-between px-2" style={{ height: '50px' }}>
@@ -157,11 +157,11 @@ const AISafetyDashboard: React.FC = () => {
 
         {/* ROW 2: KPI METRICS (75px) */}
         <div className="flex gap-3" style={{ height: '75px' }}>
-          <MetricCard title="Total Workers Detected" value={workers} icon={<Users size={16}/>} colorClass="blue" />
-          <MetricCard title="PPE Compliance" value={`${compliance}%`} icon={<CheckCircle size={16}/>} colorClass="green" />
-          <MetricCard title="Violations Today" value={violations} icon={<ClipboardList size={16}/>} colorClass="red" />
-          <MetricCard title="Active Alerts" value={activeAlerts} icon={<AlertTriangle size={16}/>} colorClass="red" />
-          <MetricCard title="Cameras Online" value="16 / 18" icon={<CameraIcon size={16}/>} colorClass="green" />
+          <MetricCard title="Total Workers Detected" value={workers} icon={<Users size={16} />} colorClass="blue" />
+          <MetricCard title="PPE Compliance" value={`${compliance}%`} icon={<CheckCircle size={16} />} colorClass="green" />
+          <MetricCard title="Violations Today" value={violations} icon={<ClipboardList size={16} />} colorClass="red" />
+          <MetricCard title="Active Alerts" value={activeAlerts} icon={<AlertTriangle size={16} />} colorClass="red" />
+          <MetricCard title="Cameras Online" value="16 / 18" icon={<CameraIcon size={16} />} colorClass="green" />
         </div>
 
         {/* ROW 3: CAMERA FEEDS (200px) */}
@@ -182,7 +182,7 @@ const AISafetyDashboard: React.FC = () => {
                 <BarChart data={ppeData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#cbd5e1', fontSize: 11 }} />
                   <YAxis axisLine={false} tickLine={false} tick={{ fill: '#cbd5e1', fontSize: 11 }} />
-                  <RechartsTooltip cursor={{fill: 'rgba(255,255,255,0.05)'}} contentStyle={{ backgroundColor: 'var(--panel-bg)', borderColor: 'var(--panel-border)', borderRadius: '8px' }} />
+                  <RechartsTooltip cursor={{ fill: 'rgba(255,255,255,0.05)' }} contentStyle={{ backgroundColor: 'var(--panel-bg)', borderColor: 'var(--panel-border)', borderRadius: '8px' }} />
                   <Bar dataKey="count" fill="var(--primary-blue)" radius={[4, 4, 0, 0]} barSize={40} />
                 </BarChart>
               </ResponsiveContainer>
@@ -197,8 +197,8 @@ const AISafetyDashboard: React.FC = () => {
                 <AreaChart data={timeSeries} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorVio" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="var(--primary-blue)" stopOpacity={0.5}/>
-                      <stop offset="95%" stopColor="var(--primary-blue)" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="var(--primary-blue)" stopOpacity={0.5} />
+                      <stop offset="95%" stopColor="var(--primary-blue)" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fill: '#cbd5e1', fontSize: 11 }} />
@@ -217,10 +217,10 @@ const AISafetyDashboard: React.FC = () => {
               <div className="absolute inset-2">
                 <div className="zone red" style={{ top: '5%', left: '5%', width: '25%', height: '40%' }}>Loading Area</div>
                 <div className="zone red" style={{ top: '50%', left: '5%', width: '25%', height: '40%' }}>Loading Area</div>
-                
+
                 <div className="zone orange" style={{ top: '15%', left: '35%', width: '20%', height: '25%' }}>Zones</div>
                 <div className="zone orange" style={{ top: '45%', left: '35%', width: '20%', height: '15%' }}>Zones</div>
-                
+
                 <div className="zone green" style={{ top: '5%', left: '60%', width: '35%', height: '40%' }}>Warehouse</div>
                 <div className="zone green" style={{ top: '50%', left: '60%', width: '35%', height: '40%' }}>Warehouse</div>
               </div>
@@ -294,7 +294,7 @@ const AISafetyDashboard: React.FC = () => {
               <p className="mt-2 text-[12px] text-gray-400">This dashboard is displaying simulated tracking data and static references for demonstration purposes only.</p>
             </div>
             <div className="flex justify-end mt-2">
-              <button 
+              <button
                 onClick={() => setShowDemoPopup(false)}
                 className="text-[12px] font-bold uppercase tracking-wider px-5 py-2.5 bg-[var(--primary-blue)] text-[#060b14] rounded hover:bg-blue-400 transition-colors cursor-pointer"
               >
@@ -309,7 +309,7 @@ const AISafetyDashboard: React.FC = () => {
 };
 
 // Subcomponents
-const MetricCard = ({ title, value, icon, colorClass }: { title: string, value: string|number, icon: React.ReactNode, colorClass: 'blue'|'green'|'red' }) => (
+const MetricCard = ({ title, value, icon, colorClass }: { title: string, value: string | number, icon: React.ReactNode, colorClass: 'blue' | 'green' | 'red' }) => (
   <div className="panel flex-1 flex flex-col items-center justify-center py-1 px-1 gap-0 text-center">
     <div className={`icon-box ${colorClass} mb-0.5 w-6 h-6`}>
       {icon}
@@ -321,7 +321,7 @@ const MetricCard = ({ title, value, icon, colorClass }: { title: string, value: 
 
 const CameraFeed = ({ id, bg, imgSrc, onClick, hasDetection, offline }: { id: string, bg?: string, imgSrc?: string, onClick?: () => void, hasDetection: boolean, offline?: boolean }) => (
   <div onClick={onClick} className={`panel flex-1 relative overflow-hidden ${onClick ? 'cursor-pointer hover:brightness-110 transition-all' : ''}`} style={{ background: imgSrc ? `url(${imgSrc}) center/cover no-repeat` : bg }}>
-    
+
     {/* Simulated detections for bg cameras */}
     {!imgSrc && hasDetection && !offline && (
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -342,8 +342,8 @@ const CameraFeed = ({ id, bg, imgSrc, onClick, hasDetection, offline }: { id: st
     <div className="absolute top-3 left-3 right-3 flex justify-between items-start pointer-events-none">
       <div className={`cam-badge ${offline ? 'bg-gray-700 text-gray-400' : ''}`}>{id}</div>
       <div className="flex items-center gap-2">
-         <span className={`text-[10px] font-bold tracking-widest ${offline ? 'text-gray-700' : 'text-white/70'}`}>REC</span>
-         <span className={`w-2 h-2 rounded-full ${offline ? 'bg-gray-700' : 'bg-red-500 animate-blink shadow-[0_0_8px_red]'}`}></span>
+        <span className={`text-[10px] font-bold tracking-widest ${offline ? 'text-gray-700' : 'text-white/70'}`}>REC</span>
+        <span className={`w-2 h-2 rounded-full ${offline ? 'bg-gray-700' : 'bg-red-500 animate-blink shadow-[0_0_8px_red]'}`}></span>
       </div>
     </div>
   </div>
