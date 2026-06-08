@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, AlertTriangle, Camera as CameraIcon, ShieldAlert, CheckCircle, ClipboardList, Zap } from 'lucide-react';
+import { Users, AlertTriangle, Camera as CameraIcon, ShieldAlert, CheckCircle, ClipboardList, Zap, Cpu } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, LineChart, Line, AreaChart, Area } from 'recharts';
 
 const GLOBAL_STYLES = `
@@ -129,6 +129,10 @@ const AISafetyDashboard: React.FC = () => {
     return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
   };
 
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  };
+
   const ppeData: ViolationData[] = [
     { name: 'No Helmet', count: 100, fill: 'var(--primary-blue)' },
     { name: 'No Vest', count: 65, fill: 'var(--primary-blue)' },
@@ -144,14 +148,20 @@ const AISafetyDashboard: React.FC = () => {
         {/* ROW 1: HEADER (50px) */}
         <div className="flex items-center justify-between px-2" style={{ height: '50px' }}>
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-[#1e3a8a] rounded-lg flex items-center justify-center border border-[#3b82f6] shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-              <Zap className="text-white w-6 h-6" />
+            <div className="relative flex items-center justify-center w-10 h-10 shrink-0">
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-cyan-400 rounded-[10px] transform rotate-45 opacity-40 blur-[3px]"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-cyan-400 rounded-[10px] transform rotate-45 shadow-[0_0_15px_rgba(56,189,248,0.4)]"></div>
+              <div className="absolute inset-[2px] bg-[#060b14] rounded-[8px] transform rotate-45"></div>
+              <Cpu className="text-cyan-400 w-5 h-5 relative z-10" />
             </div>
-            <h1 className="font-['Cinzel'] text-3xl font-semibold tracking-wide text-white m-0">AI SAFETY COMPLIANCE DASHBOARD</h1>
+            <h1 className="font-['Cinzel'] text-3xl font-semibold tracking-wide text-white m-0 ml-2">AI SAFETY COMPLIANCE DASHBOARD</h1>
           </div>
-          <div className="flex items-center gap-6">
-            <div className="w-px h-8 bg-white/20"></div>
-            <div className="text-2xl font-['Cinzel'] tracking-wider">{formatDate(currentTime)}</div>
+          <div className="flex items-center gap-5">
+            <div className="w-px h-10 bg-white/20"></div>
+            <div className="flex flex-col items-end justify-center">
+              <span className="text-[22px] font-['Cinzel'] tracking-wider text-white leading-none">{formatDate(currentTime)}</span>
+              <span className="text-[13px] font-['Cinzel'] tracking-[0.15em] text-[#60a5fa] font-bold leading-none mt-1.5">{formatTime(currentTime)}</span>
+            </div>
           </div>
         </div>
 
