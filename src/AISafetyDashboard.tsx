@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Users, AlertTriangle, Camera as CameraIcon, ShieldAlert, CheckCircle, ClipboardList, Zap } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, Cell, AreaChart, Area, LineChart, Line } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, LineChart, Line, AreaChart, Area } from 'recharts';
 
 const GLOBAL_STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap');
@@ -88,8 +88,8 @@ const AISafetyDashboard: React.FC = () => {
   const [activeAlerts, setActiveAlerts] = useState(5);
   const [cpuUsage, setCpuUsage] = useState(68);
 
-  const [timeSeries, setTimeSeries] = useState<TimeSeriesData[]>(() => {
-    const initial = [];
+  const [timeSeries] = useState<TimeSeriesData[]>(() => {
+    const initial: TimeSeriesData[] = [];
     const times = ['8 AM', '9 AM', '12 PM', '2 PM', '4 PM', '6 PM', '8 PM'];
     times.forEach((t) => {
       initial.push({
