@@ -155,13 +155,13 @@ const AISafetyDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* ROW 2: KPI METRICS (110px) */}
-        <div className="flex gap-3" style={{ height: '110px' }}>
-          <MetricCard title="Total Workers Detected" value={workers} icon={<Users size={24}/>} colorClass="blue" />
-          <MetricCard title="PPE Compliance" value={`${compliance}%`} icon={<CheckCircle size={24}/>} colorClass="green" />
-          <MetricCard title="Violations Today" value={violations} icon={<ClipboardList size={24}/>} colorClass="red" />
-          <MetricCard title="Active Alerts" value={activeAlerts} icon={<AlertTriangle size={24}/>} colorClass="red" />
-          <MetricCard title="Cameras Online" value="16 / 18" icon={<CameraIcon size={24}/>} colorClass="green" />
+        {/* ROW 2: KPI METRICS (75px) */}
+        <div className="flex gap-3" style={{ height: '75px' }}>
+          <MetricCard title="Total Workers Detected" value={workers} icon={<Users size={16}/>} colorClass="blue" />
+          <MetricCard title="PPE Compliance" value={`${compliance}%`} icon={<CheckCircle size={16}/>} colorClass="green" />
+          <MetricCard title="Violations Today" value={violations} icon={<ClipboardList size={16}/>} colorClass="red" />
+          <MetricCard title="Active Alerts" value={activeAlerts} icon={<AlertTriangle size={16}/>} colorClass="red" />
+          <MetricCard title="Cameras Online" value="16 / 18" icon={<CameraIcon size={16}/>} colorClass="green" />
         </div>
 
         {/* ROW 3: CAMERA FEEDS (200px) */}
@@ -173,7 +173,7 @@ const AISafetyDashboard: React.FC = () => {
         </div>
 
         {/* ROW 4: CHARTS */}
-        <div className="flex gap-3 flex-[1.5] min-h-0">
+        <div className="flex gap-3 flex-1 min-h-0">
           {/* PPE Breakdown */}
           <div className="panel flex-1 min-w-0">
             <div className="panel-header">PPE Violations Breakdown</div>
@@ -310,12 +310,12 @@ const AISafetyDashboard: React.FC = () => {
 
 // Subcomponents
 const MetricCard = ({ title, value, icon, colorClass }: { title: string, value: string|number, icon: React.ReactNode, colorClass: 'blue'|'green'|'red' }) => (
-  <div className="panel flex-1 flex flex-col items-center justify-center py-2 px-1 gap-1 text-center">
-    <div className={`icon-box ${colorClass} mb-1 w-10 h-10`}>
+  <div className="panel flex-1 flex flex-col items-center justify-center py-1 px-1 gap-0 text-center">
+    <div className={`icon-box ${colorClass} mb-0.5 w-6 h-6`}>
       {icon}
     </div>
-    <span className="metric-label leading-tight">{title}</span>
-    <span className="metric-value text-[24px]">{value}</span>
+    <span className="metric-label leading-tight text-[10px]">{title}</span>
+    <span className="metric-value text-[18px]">{value}</span>
   </div>
 );
 
