@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, AlertTriangle, Camera as CameraIcon, ShieldAlert, CheckCircle, ClipboardList, Zap, Cpu } from 'lucide-react';
+import { Users, AlertTriangle, Camera as CameraIcon, ShieldAlert, CheckCircle, ClipboardList, Cpu } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, LineChart, Line, AreaChart, Area } from 'recharts';
 
 const GLOBAL_STYLES = `
