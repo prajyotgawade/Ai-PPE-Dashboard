@@ -94,18 +94,19 @@ const AISafetyDashboard: React.FC = () => {
     times.forEach((t) => {
       initial.push({
         time: t,
-        violations: Math.floor(Math.random() * 60) + 10,
-        compliance: 80 + Math.random() * 20
+        violations: Math.floor(Math.random() * 12) + 2,
+        compliance: parseFloat((90 + Math.random() * 9.5).toFixed(4))
       });
     });
     return initial;
   });
 
   const alerts: Alert[] = [
-    { id: 1, time: '11:45:00 AM', message: 'Time started', cam: 'Camera 1' },
-    { id: 2, time: '11:45:00 AM', message: 'Time started', cam: 'Camera 2' },
-    { id: 3, time: '11:45:00 PM', message: 'Time started', cam: 'Camera 3' },
-    { id: 4, time: '11:45:00 PM', message: 'Time started', cam: 'Camera 4' },
+    { id: 1, time: '11:28:14 AM', message: 'No Safety Helmet Detected', cam: 'Cam 01' },
+    { id: 2, time: '11:15:32 AM', message: 'Missing High-Visibility Vest', cam: 'Cam 03' },
+    { id: 3, time: '10:42:05 AM', message: 'CRITICAL: Video Feed Signal Lost', cam: 'Cam 02' },
+    { id: 4, time: '09:12:44 AM', message: 'Safety Gloves Missing', cam: 'Cam 01' },
+    { id: 5, time: '08:55:10 AM', message: 'WARNING: Connection Timeout Error', cam: 'Cam 04' },
   ];
 
   // Effects
@@ -134,10 +135,10 @@ const AISafetyDashboard: React.FC = () => {
   };
 
   const ppeData: ViolationData[] = [
-    { name: 'No Helmet', count: 100, fill: 'var(--primary-blue)' },
-    { name: 'No Vest', count: 65, fill: 'var(--primary-blue)' },
-    { name: 'No Gloves', count: 30, fill: 'var(--primary-blue)' },
-    { name: 'No Boots', count: 20, fill: 'var(--primary-blue)' }
+    { name: 'No Helmet', count: 14, fill: 'var(--primary-blue)' },
+    { name: 'No Vest', count: 8, fill: 'var(--primary-blue)' },
+    { name: 'No Mask', count: 5, fill: 'var(--primary-blue)' },
+    { name: 'No Boots', count: 2, fill: 'var(--primary-blue)' }
   ];
 
   return (
@@ -249,7 +250,7 @@ const AISafetyDashboard: React.FC = () => {
                 <LineChart data={timeSeries} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fill: '#cbd5e1', fontSize: 11 }} />
                   <YAxis domain={[0, 100]} axisLine={false} tickLine={false} tick={{ fill: '#cbd5e1', fontSize: 11 }} />
-                  <RechartsTooltip contentStyle={{ backgroundColor: 'var(--panel-bg)', borderColor: 'var(--panel-border)', borderRadius: '8px' }} />
+                  <RechartsTooltip formatter={(value: number) => [value.toFixed(4) + '%', 'Compliance']} contentStyle={{ backgroundColor: 'var(--panel-bg)', borderColor: 'var(--panel-border)', borderRadius: '8px' }} />
                   <Line type="monotone" dataKey="compliance" stroke="var(--primary-blue)" strokeWidth={3} dot={false} />
                 </LineChart>
               </ResponsiveContainer>
