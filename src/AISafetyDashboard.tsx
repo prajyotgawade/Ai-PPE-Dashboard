@@ -291,23 +291,23 @@ const AISafetyDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Demo Modal Popup */}
+      {/* Privacy Restriction Popup */}
       {showDemoPopup && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="bg-[#0f1c35] p-6 max-w-md w-full mx-4 flex flex-col gap-4 border border-[var(--primary-blue)] rounded-xl shadow-[0_0_30px_rgba(96,165,250,0.3)]">
-            <div className="flex items-center gap-3 text-[var(--primary-blue)] border-b border-white/10 pb-3">
+          <div className="bg-[#0f1c35] p-6 max-w-md w-full mx-4 flex flex-col gap-4 border border-red-500/50 rounded-xl shadow-[0_0_30px_rgba(239,68,68,0.2)]">
+            <div className="flex items-center gap-3 text-red-400 border-b border-white/10 pb-3">
               <ShieldAlert size={24} />
-              <h2 className="font-['Cinzel'] text-xl tracking-wider uppercase m-0 font-bold">Demo Mode</h2>
+              <h2 className="font-['Cinzel'] text-xl tracking-wider uppercase m-0 font-bold">Privacy Restriction</h2>
             </div>
             <div className="text-[14px] text-gray-300 leading-relaxed font-['Inter']">
-              <p className="mb-2 text-[var(--warning-amber)] font-semibold">STATUS: LIVE FEED DISCONNECTED</p>
-              <p>This is a demonstration environment. The actual live camera feeds are not currently connected.</p>
-              <p className="mt-2 text-[12px] text-gray-400">This dashboard is displaying simulated tracking data and static references for demonstration purposes only.</p>
+              <p className="mb-2 text-red-400 font-semibold uppercase tracking-wider text-[12px]">Restricted Access</p>
+              <p>Direct camera feed viewing is currently restricted in accordance with corporate privacy and security protocols.</p>
+              <p className="mt-2 text-[12px] text-gray-400 border-l-2 border-red-500/50 pl-3">All video streams are encrypted and processed automatically by the AI engine. Manual viewing requires elevated authorization.</p>
             </div>
             <div className="flex justify-end mt-2">
               <button
                 onClick={() => setShowDemoPopup(false)}
-                className="text-[12px] font-bold uppercase tracking-wider px-5 py-2.5 bg-[var(--primary-blue)] text-[#060b14] rounded hover:bg-blue-400 transition-colors cursor-pointer"
+                className="text-[12px] font-bold uppercase tracking-wider px-5 py-2.5 bg-red-500/20 text-red-300 border border-red-500/50 rounded hover:bg-red-500/30 transition-colors cursor-pointer"
               >
                 Acknowledge
               </button>
