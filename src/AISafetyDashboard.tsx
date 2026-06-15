@@ -176,9 +176,9 @@ const AISafetyDashboard: React.FC = () => {
 
         {/* ROW 3: CAMERA FEEDS (200px) */}
         <div className="flex gap-3" style={{ height: '200px' }}>
-          <CameraFeed onClick={() => setShowDemoPopup(true)} id="Cam 01" imgSrc="/cam1-dummy.jpg" hasDetection={true} />
+          <CameraFeed onClick={() => setShowDemoPopup(true)} id="Cam 01" imgSrc="/cam1-new.png" hasDetection={true} />
           <CameraFeed onClick={() => setShowDemoPopup(true)} id="Cam 02" bg="#0a1120" hasDetection={false} offline={true} />
-          <CameraFeed onClick={() => setShowDemoPopup(true)} id="Cam 03" imgSrc="/cam3-dummy.jpg" hasDetection={true} />
+          <CameraFeed onClick={() => setShowDemoPopup(true)} id="Cam 03" imgSrc="/cam3-new.png" hasDetection={true} />
           <CameraFeed onClick={() => setShowDemoPopup(true)} id="Cam 04" bg="#0a1120" hasDetection={false} offline={true} />
         </div>
 
