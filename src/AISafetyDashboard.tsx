@@ -148,13 +148,14 @@ const AISafetyDashboard: React.FC = () => {
         {/* ROW 1: HEADER (50px) */}
         <div className="flex items-center justify-between px-2" style={{ height: '50px' }}>
           <div className="flex items-center gap-4">
-            <div className="relative flex items-center justify-center w-10 h-10 shrink-0">
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-cyan-400 rounded-[10px] transform rotate-45 opacity-40 blur-[3px]"></div>
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-cyan-400 rounded-[10px] transform rotate-45 shadow-[0_0_15px_rgba(56,189,248,0.4)]"></div>
-              <div className="absolute inset-[2px] bg-[#060b14] rounded-[8px] transform rotate-45"></div>
-              <Cpu className="text-cyan-400 w-5 h-5 relative z-10" />
+            <div className="relative flex items-center justify-center w-14 h-14 shrink-0 mr-1">
+              <img src="/logo.png" alt="Company Logo" className="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]" />
             </div>
-            <h1 className="font-['Cinzel'] text-3xl font-semibold tracking-wide text-white m-0 ml-2">AI SAFETY COMPLIANCE DASHBOARD</h1>
+            <div className="flex flex-col ml-3">
+              <h1 className="font-['Cinzel'] text-[28px] font-bold tracking-wider m-0 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 drop-shadow-[0_0_8px_rgba(56,189,248,0.3)] uppercase">
+                Swash Nonionics Private Limited
+              </h1>
+            </div>
           </div>
           <div className="flex items-center gap-5">
             <div className="w-px h-10 bg-white/20"></div>
